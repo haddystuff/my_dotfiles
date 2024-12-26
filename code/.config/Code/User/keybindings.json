@@ -1,0 +1,79 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "ctrl+w",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": { "text": "\u0017" },
+        "when": "terminalFocus"
+    },
+    // {
+    //     "key": "ctrl+w",
+    //     "command": "workbench.action.closeActiveEditor",
+    //     "when": "!terminalFocus"
+    // },
+    // {
+    //     "key": "alt+o",
+    //     "command": "workbench.action.openChat",
+    // },
+    {
+        "key": "alt+o",
+        "command": "runCommands",
+        "when": "terminalProcessSupported",
+        "args":{
+            "commands": [
+                "workbench.action.openChat",
+                "workbench.action.pinEditor",
+                ]
+            }
+    },
+    {
+    "key": "alt+t",
+    "command": "runCommands",
+    "when": "terminalProcessSupported",
+    "args":{
+        "commands": [
+            "workbench.action.createTerminalEditor",
+            "workbench.action.pinEditor",
+            ]
+        }
+    },
+    {
+        "key": "alt+1",
+        "command": "workbench.action.openEditorAtIndex1",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+2",
+        "command": "workbench.action.openEditorAtIndex2",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+3",
+        "command": "workbench.action.openEditorAtIndex3",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+4",
+        "command": "workbench.action.openEditorAtIndex4",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+5",
+        "command": "workbench.action.openEditorAtIndex5",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+b",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+v",
+        "command": "toggleVim"
+    },
+    {
+        "key": "ctrl+w l",
+        "command": "workbench.action.focusFirstEditorGroup",
+        "when": "sideBarFocus && vim.active"
+    }
+]

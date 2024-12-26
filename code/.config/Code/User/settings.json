@@ -1,0 +1,55 @@
+{
+    "editor.minimap.enabled": false,
+    "flake8.path": ["/usr/bin/flake8"],
+    "black-formatter.path": ["/usr/bin/black"],
+    "black-formatter.args": [
+        "--line-length",
+        "120"
+    ],
+    "mypy-type-checker.args": [
+        "--ignore-missing-imports"
+    ],
+    "python.venvFolders": [
+        ".venv",
+        "venv",
+        ".env",
+        "~/.virtualenvs"
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["g", "r"],
+            "commands": ["editor.action.goToReferences"],
+            "silent": true
+        }
+    ],
+    "vim.disableExtension": true,
+    "vim.useCtrlKeys": true,
+    "vim.handleKeys": { 
+        "<C-f>": false,
+        "<C-b>": false,
+        "<C-p>": false,
+    },
+    "vim.visualstar": true,
+    "vim.surround": true,
+    "vim.hlsearch": true,
+    "vim.leader": "<space>",
+    "vim.useSystemClipboard": true,
+    "vim.highlightedyank.enable": true,
+    "terminal.integrated.allowMnemonics": true,
+    "editor.inlineSuggest.enabled": true,
+    "[python]": {
+        "editor.formatOnType": true,
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": true,
+        "markdown": true,
+        "scminput": false,
+        "yaml": true,
+        "ini": false
+    },
+    "telemetry.telemetryLevel": "off",
+    "extensions.ignoreRecommendations": true,
+    "window.zoomLevel": 2,
+}
