@@ -100,6 +100,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Set notimeout
 vim.g.notimeout = true
 
+-- No fix end of file
+vim.opt.fixeol = false
+
 -- Set encoding
 vim.opt.encoding = "utf-8"
 
