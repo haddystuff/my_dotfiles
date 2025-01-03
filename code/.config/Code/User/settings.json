@@ -6,6 +6,7 @@
         "--line-length",
         "120"
     ],
+    "search.useIgnoreFiles": false,
     "mypy-type-checker.args": [
         "--ignore-missing-imports"
     ],
