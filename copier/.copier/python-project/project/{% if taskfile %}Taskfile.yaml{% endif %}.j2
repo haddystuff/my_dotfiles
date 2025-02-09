@@ -1,0 +1,51 @@
+version: '3'
+
+tasks:
+
+  init:
+    desc: "pre-commit hooks"
+    cmds:
+      - echo "🚀 Creating virtual environment using uv"
+      - uv sync
+      - echo "🚀 Installing pre-commit hooks"
+      - uv run pre-commit install
+
+  check:
+    desc: "Run checks including linting"
+    cmds:
+      - echo "🚀 Checking lock file consistency with 'pyproject.toml'"
+      - uv lock --locked
+      - echo "🚀 Static type checking - Running mypy"
+      - uv run mypy
+      - echo "🚀 Code formatting - Running black"
+      - uv run black
+{% if "flake8" in linters %}
+      - echo "🚀 Linting - Running flake8"
+      - uv run flake8 {{ project_slug}} tests
+{% endif %}
+{% if "ruff" in linters %}
+      - echo "🚀 Linting - Running ruff"
+      - uv run ruff
+{% endif %}
+
+{% if pytest %}
+  test:
+    desc: "Run tests"
+    cmds:
+      - echo "🚀 Running tests"
+      - uv run python -m pytest {% if codecov %}--cov --cov-config=pyproject.toml{% endif %} tests
+{% endif %}
+
+{% if mkdocs %}
+  doc-test:
+    desc: "Test if documentation can be built without warnings or errors"
+    cmds:
+      - echo "🚀 Testing documentation"
+      - uv run mkdocs build -s
+
+  doc-serve:
+    desc: "Serve documentation locally"
+    cmds:
+      - echo "🚀 Serving documentation"
+      - uv run mkdocs serve
+{% endif %}

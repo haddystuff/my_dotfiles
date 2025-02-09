@@ -1,0 +1,29 @@
+# {{project_name}}
+
+{{project_description}}
+
+## Getting started with your project
+
+### Usage
+If you have `uv` then just run
+```bash
+uv run {{ project_slug }}/foo.py
+```
+
+#### Virtual environment
+If you want to deploy venv first just run
+```bash
+uv sync && source .venv/bin/activate
+```
+If you don't have `uv`
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install {{project_slug}}
+```
+
+{% if taskfile %}
+### Taskfile
+You can also rule this project with taskfile. This is just like makefile but better.
+Just run `task` to see the options and description of these options.
+{% endif %}

@@ -1,0 +1,125 @@
+[project]
+name = "{{ project_name }}"
+version = "0.1"
+description = "{{ project_description }}"
+authors = [{ name = "{{author}}", email = "{{ email }}" }]
+readme = "README.md"
+keywords = ['python']
+requires-python = ">=3.12,<4.0"
+
+[dependency-groups]
+dev = [
+    {% if pytest %}"pytest>=8.3.4",{% endif %}
+    "pre-commit>=4.0.1",
+    "mypy>=1.14.1",
+    "isort>=5.13.2",
+    "black>=24.10.0",
+    {% if codecov %}"pytest-cov>=6.0.0",{% endif %}
+    {% if mkdocs %}"mkdocs>=1.6.1",
+    "mkdocs-material>=9.5.50",
+    "mkdocstrings[python]>=0.27.0",{% endif %}
+    {% if 'flake8' in linters %}"flake8>=7.1.1",
+    "pep8-naming>=0.14.1",
+    "flake8-spellcheck>=0.28.0",
+    "flake8-bandit>=4.1.1",
+    "flake8-bugbear>=24.12.12",
+    "flake8-builtins>=2.5.0",
+    "flake8-comprehensions>=3.16.0",
+    "flake8-eradicate>=1.5.0",
+    "flake8-isort>=6.1.1",
+    "flake8-pytest-style>=2.1.0",
+    "flake8-black>=0.3.6",
+    "flake8-string-format>=0.3.0",
+    "flake8-tidy-imports>=4.11.0",
+    "flake8-variables-names>=0.0.6",{% endif %}
+    {% if 'ruff' in linters %}
+    "ruff>=0.9.2",{% endif %}
+]
+
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["{{project_slug}}"]
+
+[tool.mypy]
+files = ["{{project_slug}}"]
+check_untyped_defs = true
+warn_return_any = true
+warn_unused_ignores = true
+show_error_codes = true
+ignore_missing_imports = true
+
+{% if pytest %}
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+{% endif %}
+
+{% if 'flake8' in linters %}
+[tool.flake8]
+max-line-length = 120
+docstring-convention = "google"
+{% endif %}
+{% if 'ruff' in linters %}
+[tool.ruff]
+line-length = 120
+fix = true
+
+[tool.ruff.lint]
+select = [
+    # flake8-2020
+    "YTT",
+    # flake8-bandit
+    "S",
+    # flake8-bugbear
+    "B",
+    # flake8-builtins
+    "A",
+    # flake8-comprehensions
+    "C4",
+    # flake8-debugger
+    "T10",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # mccabe
+    "C90",
+    # pycodestyle
+    "E", "W",
+    # pyflakes
+    "F",
+    # pygrep-hooks
+    "PGH",
+    # pyupgrade
+    "UP",
+    # ruff
+    "RUF",
+    # tryceratops
+    "TRY",
+]
+preview = true
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+
+[tool.ruff.format]
+preview = true
+{% endif %}
+
+[tool.black]
+preview = true
+line-length = 120
+
+{% if codecov-%}
+[tool.coverage.report]
+skip_empty = true
+
+[tool.coverage.run]
+branch = true
+source = ["{{project_slug}}"]
+{% endif %}
+
+[tool.isort]
+line_length = 120

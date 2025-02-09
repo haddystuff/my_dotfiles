@@ -1,0 +1,44 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: "v5.0.0"
+    hooks:
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: check-json
+      - id: check-yaml
+      - id: trailing-whitespace
+      - id: detect-private-key
+
+  - repo: local
+    hooks:
+      - id: mypy
+        name: mypy
+        entry: uv run mypy
+        language: system
+        types: [python]
+        args: [--strict, --show-error-codes, --pretty]
+        pass_filenames: false
+{% if "flake8" in linters %}
+      - id: flake8
+        name: flake8
+        entry: uv run flake8
+        language: python
+        types: [python]
+        args: [{{ project_slug }}, tests]
+        pass_filenames: False
+{% endif %}
+{% if "ruff" in linters %}
+      - id: ruff
+        name: ruff
+        entry: uv run ruff
+        language: python
+        types: [python]
+        args: [check, --no-fix]
+        pass_filenames: false
+{% endif %}
+      - id: black
+        name: black
+        entry: uv run black
+        language: python
+        types: [python]
+        args: [--check, -v]
