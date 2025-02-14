@@ -44,7 +44,10 @@
         "approle",
         "techops",
         "edgecore",
-        "agroshev"
+        "agroshev",
+        "datacenter",
+        "ngcs",
+        "datacenters"
     ],
     "python.venvFolders": [
         ".venv",
