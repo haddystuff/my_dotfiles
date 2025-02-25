@@ -12,14 +12,21 @@ project_name:
   type: str
   help: "Project name"
   validator: >-
-    {% if not (project_name | regex_search('^[a-z][a-z0-9\-]+$')) %}
+    {% if not (project_name | regex_search('^[a-z][a-z0-9\-_]+$')) %}
     project_name must start with a letter, followed one or more letters, digits or dashes all lowercase.
     {% endif %}
 
 project_slug:
   type: str
   help: "Project slug"
-  default: "{{ project_name.lower().replace(' ', '_') }}"
+  default: "{{ project_name.lower().replace(' ', '_').replace('-', '_') }}"
+  validator: >-
+    {% if not (project_slug | regex_search('^[a-z][a-z0-9_]+$')) %}
+    project_slug must start with a letter, followed one or more letters, digits or underscores all lowercase.
+    {% endif %}
+    {% if project_slug != project_slug.lower() %}
+    project_slug must be all lowercase.
+    {% endif %}
 
 project_description:
   type: str
@@ -33,6 +40,7 @@ linters:
   choices:
     - flake8
     - ruff
+    - pylint
 
 mkdocs:
   type: bool

@@ -17,3 +17,9 @@ dev = [
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+
+[tool.pylint]
+disable = ["missing-module-docstring", "missing-function-docstring", "missing-class-docstring"]
+max-line-length = 110
+ignore-patterns = ["tests/*"]
+output-format = "colorized"

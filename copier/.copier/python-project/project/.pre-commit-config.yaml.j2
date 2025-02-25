@@ -42,3 +42,17 @@ repos:
         language: python
         types: [python]
         args: [--check, -v]
+
+      - id: isort
+        name: isort
+        entry: uv run isort
+        language: python
+        types: [python]
+        args: [--check-only, -v]
+{% if 'pylint' in linters %}
+      - id: pylint
+        name: pylint
+        entry: uv run pylint
+        language: python
+        types: [python]
+{% endif %}

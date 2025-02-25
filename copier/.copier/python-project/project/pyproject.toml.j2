@@ -14,6 +14,7 @@ dev = [
     "mypy>=1.14.1",
     "isort>=5.13.2",
     "black>=24.10.0",
+    {% if 'pylint' in linters %}"pylint>=3.3.4",{% endif %}
     {% if codecov %}"pytest-cov>=6.0.0",{% endif %}
     {% if mkdocs %}"mkdocs>=1.6.1",
     "mkdocs-material>=9.5.50",
@@ -32,8 +33,7 @@ dev = [
     "flake8-string-format>=0.3.0",
     "flake8-tidy-imports>=4.11.0",
     "flake8-variables-names>=0.0.6",{% endif %}
-    {% if 'ruff' in linters %}
-    "ruff>=0.9.2",{% endif %}
+    {% if 'ruff' in linters %}"ruff>=0.9.2",{% endif %}
 ]
 
 [build-system]
@@ -56,14 +56,22 @@ ignore_missing_imports = true
 testpaths = ["tests"]
 {% endif %}
 
+{% if 'pylint' in linters %}
+[tool.pylint]
+disable = ["missing-module-docstring", "missing-function-docstring", "missing-class-docstring"]
+max-line-length = 110
+ignore-patterns = ["tests/*"]
+output-format = "colorized"
+{% endif %}
+
 {% if 'flake8' in linters %}
 [tool.flake8]
-max-line-length = 120
+max-line-length = 110
 docstring-convention = "google"
 {% endif %}
 {% if 'ruff' in linters %}
 [tool.ruff]
-line-length = 120
+line-length = 110
 fix = true
 
 [tool.ruff.lint]
@@ -110,7 +118,7 @@ preview = true
 
 [tool.black]
 preview = true
-line-length = 120
+line-length = 110
 
 {% if codecov-%}
 [tool.coverage.report]
@@ -122,4 +130,4 @@ source = ["{{project_slug}}"]
 {% endif %}
 
 [tool.isort]
-line_length = 120
+line_length = 110

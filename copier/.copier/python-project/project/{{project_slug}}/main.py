@@ -1,16 +1,16 @@
-def foo(bar: str) -> str:
+def bla(tar: str) -> str:
     """Summary line.
 
     Extended description of function.
 
     Args:
-        bar: Description of input argument.
+        tar: Description of input argument.
 
     Returns:
         Description of return value
     """
 
-    return bar
+    return tar
 
 
 if __name__ == "__main__":

@@ -47,7 +47,9 @@
         "agroshev",
         "datacenter",
         "ngcs",
-        "datacenters"
+        "datacenters",
+        "usefixtures",
+        "dind",
     ],
     "python.venvFolders": [
         ".venv",
