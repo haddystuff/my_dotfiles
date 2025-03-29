@@ -84,6 +84,7 @@ Plug 'kylechui/nvim-surround'
 " Toggle terminal
 " Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
+set clipboard+=unnamedplus
 call plug#end()
 ]])
 
@@ -133,10 +134,10 @@ vim.opt.scrolloff = 6
 -- vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 
 -- Copy to clipboard
-vim.keymap.set("v", "<leader>y", "\"+y", {noremap = true})
-vim.keymap.set("n", "<leader>y", "\"+y", {noremap = true})
-vim.keymap.set("v", "<leader>p", "\"+P", {noremap = true})
-vim.keymap.set("n", "<leader>p", "\"+p", {noremap = true})
+-- vim.keymap.set("v", "<leader>y", "\"+y", {noremap = true})
+-- vim.keymap.set("n", "<leader>y", "\"+y", {noremap = true})
+-- vim.keymap.set("v", "<leader>p", "\"+P", {noremap = true})
+-- vim.keymap.set("n", "<leader>p", "\"+p", {noremap = true})
 
 -- Move between windows in terminal
 -- disabled cause it's triggers when I try to delete word in terminal
