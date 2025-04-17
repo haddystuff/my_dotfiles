@@ -1,55 +1,13 @@
 {
     "editor.minimap.enabled": false,
-    // "flake8.path": ["/usr/bin/flake8"],
     "black-formatter.path": ["/usr/bin/black"],
     "black-formatter.args": [
         "--line-length",
-        "120"
+        "110"
     ],
     // "search.useIgnoreFiles": false,
     "mypy-type-checker.args": [
         "--ignore-missing-imports"
-    ],
-    "cSpell.words": [
-        "vyos",
-        "vyatta",
-        "dcim",
-        "viewsets",
-        "netmiko",
-        "fastapi",
-        "loglevel",
-        "setuptools",
-        "pytest",
-        "mkdocs",
-        "tacacs",
-        "configdb",
-        "ionos",
-        "scapi",
-        "pydantic",
-        "pylint",
-        "pyproject",
-        "pyright",
-        "mypy",
-        "cookiecutter",
-        "isort",
-        "venv",
-        "cicd",
-        "djangorestframework",
-        "mkdocstrings",
-        "Aleksandr",
-        "Groshev",
-        "pycache",
-        "pythonpath",
-        "taskfile",
-        "approle",
-        "techops",
-        "edgecore",
-        "agroshev",
-        "datacenter",
-        "ngcs",
-        "datacenters",
-        "usefixtures",
-        "dind",
     ],
     "python.venvFolders": [
         ".venv",
@@ -57,6 +15,9 @@
         ".env",
         "~/.virtualenvs"
     ],
+    "[go.mod]": {
+        "editor.formatOnSave": false,
+    },
     "vim.normalModeKeyBindingsNonRecursive": [
         {
             "before": ["g", "r"],
@@ -81,10 +42,10 @@
     "editor.inlineSuggest.enabled": true,
     "[python]": {
         "editor.formatOnType": true,
-        "editor.defaultFormatter": "ms-python.black-formatter"
+        "editor.defaultFormatter": "charliermarsh.ruff"
     },
     "github.copilot.enable": {
-        "*": true,
+        "*": false,
         "plaintext": true,
         "markdown": true,
         "scminput": false,

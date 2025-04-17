@@ -149,9 +149,9 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", {noremap = true})
 require("telescope").setup {
   pickers = {
     find_files = {
-      hidden = true,
-      no_ignore = true,
-      no_ingore_parent = true
+      hidden = false,
+      no_ignore = false,
+      no_ingore_parent = false,
     },
     grep_string = {
       additional_args = {"--hidden", "--no-ignore", "-i", "-g", "!.git"}
