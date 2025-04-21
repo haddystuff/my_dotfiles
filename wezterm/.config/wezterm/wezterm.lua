@@ -27,6 +27,8 @@ config.window_padding = {
   top = 4,
   bottom = 0,
 }
+-- disable font ligatures
+config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 config.keys = {
   { key = 'Enter', mods = 'CTRL|SHIFT',   action = act.TogglePaneZoomState },
   { key = 'w',     mods = 'CTRL|SHIFT',   action = act.CloseCurrentPane({ confirm = false }) },

@@ -8,7 +8,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'L3MON4D3/LuaSnip'
-Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v3.x'}
+" Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v3.x'}
 
 " Vim devfonts
 " Plug 'ryanoasis/vim-devicons'
@@ -130,6 +130,7 @@ vim.g.mapleader = " "
 vim.opt.scroll = 12
 vim.opt.scrolloff = 6
 
+vim.opt.smartindent = false
 -- Set ex mapping
 -- vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 
@@ -149,15 +150,15 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", {noremap = true})
 require("telescope").setup {
   pickers = {
     find_files = {
-      hidden = false,
+      hidden = true,
       no_ignore = false,
       no_ingore_parent = false,
     },
     grep_string = {
-      additional_args = {"--hidden", "--no-ignore", "-i", "-g", "!.git"}
+      additional_args = {"--smart-case"}
     },
     live_grep = {
-      additional_args = {"--hidden", "--no-ignore", "-i", "-g", "!.git"}
+      additional_args = {"--smart-case"}
     },
   },
 }
@@ -200,42 +201,87 @@ vim.keymap.set("n", "<leader>b", vim.cmd.NvimTreeToggle)
 vim.keymap.set("n", "<C-q>", vim.cmd.Bdelete)
 
 -- LSP config
-local lsp_zero = require('lsp-zero')
-lsp_zero.on_attach(function(client, bufnr)
-  -- see :help lsp-zero-keybindings
-  -- to learn the available actions
-  lsp_zero.default_keymaps({buffer = bufnr})
-end)
-require'lspconfig'.pylsp.setup{
+-- CMP
+local cmp = require('cmp')
+
+cmp.setup({
+  sources = {
+    {name = 'nvim_lsp'},
+  },
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({}),
+})
+-- Reserve a space in the gutter
+-- This will avoid an annoying layout shift in the screen
+vim.opt.signcolumn = 'yes'
+
+-- Add borders to floating windows
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+  vim.lsp.handlers.hover,
+  {border = 'rounded'}
+)
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+  vim.lsp.handlers.signature_help,
+  {border = 'rounded'}
+)
+
+-- Add cmp_nvim_lsp capabilities settings to lspconfig
+-- This should be executed before you configure any language server
+local lspconfig_defaults = require('lspconfig').util.default_config
+lspconfig_defaults.capabilities = vim.tbl_deep_extend(
+  'force',
+  lspconfig_defaults.capabilities,
+  require('cmp_nvim_lsp').default_capabilities()
+)
+
+-- This is where you enable features that only work
+-- if there is a language server active in the file
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(event)
+    local opts = {buffer = event.buf}
+
+    vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+    vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+    vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
+    vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
+    vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
+    vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+    vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+    vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+    vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+    vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+  end,
+})
+
+vim.lsp.enable('pylsp')
+vim.lsp.enable('ruff')
+vim.lsp.config('pylsp',{
   settings = {
     pylsp = {
       configurationSources = {'flake8', 'pycodestyle', 'mccabe', 'pyflakes'},
       plugins = {
-        flake8 = {
-          enabled = true,
-          -- ignore = {'E501'},
-          perFileIgnores = {
-            '/home/alex/Projects/ansible_collections/community/general/plugins/modules/*: E501,E402',
-            '/home/alex/Projects/ansible_collections/community/general/tests/unit/plugins/modules/*: E501,E402'
-          }
-        },
-        pycodestyle = {
-          enabled = false
-        },
-        mccabe = {
-          enabled = false
-        },
-        pyflakes = {
-          enabled = false
-        },
-        black = {
-          enabled = true,
-          lineLength = 120
-        }
+	flake8 = {
+	  enabled = true,
+	},
+	pycodestyle = {
+	  enabled = false
+	},
+	mccabe = {
+	  enabled = false
+	},
+	pyflakes = {
+	  enabled = false
+	},
       }
     }
   }
 }
+)
+
 -- Formatting keymap
 vim.keymap.set('n', '<leader>df', ': lua vim.lsp.buf.format()<CR>', {noremap = true})
 
@@ -353,4 +399,3 @@ vim.keymap.set("n", "<leader>hl", function() harpoon.ui:toggle_quick_menu(harpoo
 -- Toggle previous & next buffers stored within Harpoon list
 vim.keymap.set("n", "<C-h>", function() harpoon:list():prev() end)
 vim.keymap.set("n", "<C-l>", function() harpoon:list():next() end)
-
