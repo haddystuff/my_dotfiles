@@ -130,7 +130,7 @@ vim.g.mapleader = " "
 vim.opt.scroll = 12
 vim.opt.scrolloff = 6
 
-vim.opt.smartindent = false
+vim.opt.autoindent = true
 -- Set ex mapping
 -- vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 
@@ -259,6 +259,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 vim.lsp.enable('pylsp')
 vim.lsp.enable('ruff')
+vim.lsp.enable('golsp')
+vim.lsp.enable('ansiblelsp')
 vim.lsp.config('pylsp',{
   settings = {
     pylsp = {
@@ -267,6 +269,7 @@ vim.lsp.config('pylsp',{
 	flake8 = {
 	  enabled = true,
 	},
+	pylint = { enabled = true },
 	pycodestyle = {
 	  enabled = false
 	},
@@ -285,31 +288,28 @@ vim.lsp.config('pylsp',{
 -- Formatting keymap
 vim.keymap.set('n', '<leader>df', ': lua vim.lsp.buf.format()<CR>', {noremap = true})
 
--- Golang lsp
-require'lspconfig'.gopls.setup{}
-
 
 -- Ansible lsp
-require'lspconfig'.ansiblels.setup{
-  ansible = {
-    ansible = {
-      path = "ansible"
-    },
-    executionEnvironment = {
-      enabled = false
-    },
-    python = {
-      interpreterPath = "python3"
-    },
-    validation = {
-      enabled = true,
-      lint = {
-        enabled = true,
-        path = "ansible-lint"
-      }
-    }
-  }
-}
+-- require'lspconfig'.ansiblels.setup{
+--   ansible = {
+--     ansible = {
+--       path = "ansible"
+--     },
+--     executionEnvironment = {
+--       enabled = false
+--     },
+--     python = {
+--       interpreterPath = "python3"
+--     },
+--     validation = {
+--       enabled = true,
+--       lint = {
+--         enabled = true,
+--         path = "ansible-lint"
+--       }
+--     }
+--   }
+-- }
 
 
 -- Treesitter
@@ -317,6 +317,9 @@ require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
   ensure_installed = { "python", "yaml", "bash", "lua", "json", "toml", "dockerfile", "html", "css", "go", "markdown"},
 
+  indent = {
+    enable = true
+  },
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
 
