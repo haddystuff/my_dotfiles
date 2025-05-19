@@ -25,6 +25,20 @@
             "silent": true
         }
     ],
+    // "vim.normalModeKeyBindings": [
+    //     {
+    //         "before":["<C-n>"],
+    //         "commands": [
+    //             "selectNextSuggestion",
+    //         ]
+    //     },
+    //     {
+    //         "before":["<C-p>"],
+    //         "commands": [
+    //             "selectPreviosSuggestion",
+    //         ]
+    //     },
+    // ],
     "vim.disableExtension": true,
     "vim.useCtrlKeys": true,
     "vim.handleKeys": { 
@@ -45,7 +59,7 @@
         "editor.defaultFormatter": "charliermarsh.ruff"
     },
     "github.copilot.enable": {
-        "*": false,
+        "*": true,
         "plaintext": true,
         "markdown": true,
         "scminput": false,
@@ -55,4 +69,10 @@
     "telemetry.telemetryLevel": "off",
     "extensions.ignoreRecommendations": true,
     "window.zoomLevel": 2,
+    "python.createEnvironment.trigger": "off",
+    "remote.defaultExtensionsIfInstalledLocally": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "GitHub.vscode-pull-request-github"
+    ],
 }

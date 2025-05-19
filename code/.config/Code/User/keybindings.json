@@ -75,5 +75,15 @@
         "key": "ctrl+w l",
         "command": "workbench.action.focusFirstEditorGroup",
         "when": "sideBarFocus && vim.active"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "selectNextSuggestion",
+        "when": "suggestWidgetVisible && editorTextFocus && vim.mode == 'Insert'"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "selectPrevSuggestion",
+        "when": "suggestWidgetVisible && editorTextFocus && vim.mode == 'Insert'"
     }
 ]
