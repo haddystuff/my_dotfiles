@@ -1,0 +1,17 @@
+[MAIN]
+ignore-patterns=tests/*
+
+[REPORTS]
+output-format=colorized
+
+
+[FORMAT]
+max-line-length=110
+
+
+[MESSAGES CONTROL]
+disable=missing-module-docstring,
+        missing-function-docstring,
+        missing-class-docstring,
+        unused-import,
+        line-too-long
