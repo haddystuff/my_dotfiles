@@ -85,5 +85,15 @@
         "key": "ctrl+p",
         "command": "selectPrevSuggestion",
         "when": "suggestWidgetVisible && editorTextFocus && vim.mode == 'Insert'"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "selectNextSuggestion",
+        "when": "suggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "selectPrevSuggestion",
+        "when": "suggestWidgetVisible"
     }
 ]
