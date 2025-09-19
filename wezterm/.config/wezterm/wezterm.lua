@@ -15,6 +15,9 @@ config.window_decorations = 'TITLE|RESIZE'
 config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = true
 config.window_close_confirmation = 'NeverPrompt'
+-- Default shell program
+config.default_prog = { '/usr/bin/fish' }
+
 -- Enable the scrollbar.
 -- It will occupy the right window padding space.
 -- If right padding is set to 0 then it will be increased

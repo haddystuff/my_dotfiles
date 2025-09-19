@@ -75,4 +75,6 @@
         "GitHub.copilot-chat",
         "GitHub.vscode-pull-request-github"
     ],
+    "git.blame.editorDecoration.enabled": false,
+    "github.copilot.nextEditSuggestions.enabled": false,
 }
