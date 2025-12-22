@@ -5,6 +5,7 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 local act = wezterm.action
 config.prefer_egl=true
+config.enable_wayland = true
 -- config.window_background_opacity = 0.96
 -- This is where you actually apply your config choices
 
@@ -30,6 +31,8 @@ config.window_padding = {
   top = 4,
   bottom = 0,
 }
+-- Font configuration
+config.font_size = 14
 -- disable font ligatures
 config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 config.keys = {
