@@ -75,10 +75,6 @@
         "GitHub.copilot-chat",
         "GitHub.vscode-pull-request-github"
     ],
-<<<<<<< Updated upstream
-    "git.blame.editorDecoration.enabled": false,
-    "github.copilot.nextEditSuggestions.enabled": false,
-=======
     "[dockercompose]": {
         "editor.insertSpaces": true,
         "editor.tabSize": 2,
@@ -87,5 +83,5 @@
     },
     "explorer.confirmDelete": false,
     "explorer.confirmPasteNative": false,
->>>>>>> Stashed changes
+    "github.copilot.nextEditSuggestions.enabled": true,
 }
